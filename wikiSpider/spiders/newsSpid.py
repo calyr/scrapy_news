@@ -1,6 +1,7 @@
 import scrapy
 import hashlib
 import re
+from spiders.items import NewsItem
 class NewsSpidSpider(scrapy.Spider):
     name = "newsSpid"
     allowed_domains = ["thenextweb.com"]
@@ -39,12 +40,14 @@ class NewsSpidSpider(scrapy.Spider):
         # Generar un ID único basado en el header y la fecha
         unique_string = f"{header}-{date}"
         unique_id = hashlib.sha256(unique_string.encode()).hexdigest()
+        newsItem = NewsItem()
+    
+        newsItem['id'] = unique_id
+        newsItem['tag'] = tag
+        newsItem['header'] = header
+        newsItem['intro'] = intro
+        newsItem['date'] = date
 
-        yield {
-            'id': unique_id,
-            'tag': tag,
-            'header': header,
-            'intro': intro,
-            'date': date
-        }
+        yield newsItem
+    
 
