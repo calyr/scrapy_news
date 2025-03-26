@@ -13,9 +13,10 @@ class WikispiderItem(scrapy.Item):
 
 class NewsItem(scrapy.Item):
 
-    url: scrapy.Field()
-    id: scrapy.Field()
-    tag: scrapy.Field()
-    header: scrapy.Field()
-    intro: scrapy.Field()
-    date: scrapy.Field()
+    url =  scrapy.Field()
+    id = scrapy.Field()
+    tag = scrapy.Field()
+    header = scrapy.Field()
+    intro = scrapy.Field()
+    date = scrapy.Field()
+    body = scrapy.Field()

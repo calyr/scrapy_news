@@ -2,6 +2,8 @@ import scrapy
 import hashlib
 import re
 
+from wikiSpider.items import NewsItem
+
 class WiredSpidSpider(scrapy.Spider):
     name = "wiredSpid"
     allowed_domains = ["www.wired.com"]
@@ -34,17 +36,21 @@ class WiredSpidSpider(scrapy.Spider):
         header = header_css_content.css(".kctZMs::text").get(default='No header').strip()
         intro = response.css(".dJrDEb::text").get(default='No intro').strip()
         date = header_css_content.css("time::attr(datetime)").get(default='No date')
-
+        body_text = header_css_content.xpath("//div[@class='body__inner-container']//text()").getall()
+        body = " ".join(body_text).strip()
 
         if header != 'No header' and date != 'No date':
             unique_string = f"{header}-{date}"
             unique_id = hashlib.sha256(unique_string.encode()).hexdigest()
 
-            yield {
-                'id': unique_id,
-                'tag': tag,
-                'header': header,
-                'intro': intro,
-                'date': date
-            }
+            newsItem = NewsItem()
+    
+            newsItem['id'] = unique_id
+            newsItem['tag'] = tag
+            newsItem['header'] = header
+            newsItem['intro'] = intro
+            newsItem['date'] = date
+            newsItem['body'] = body
+
+            yield newsItem
 

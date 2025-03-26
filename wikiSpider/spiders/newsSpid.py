@@ -1,7 +1,8 @@
 import scrapy
 import hashlib
 import re
-from spiders.items import NewsItem
+
+from wikiSpider.items import NewsItem
 class NewsSpidSpider(scrapy.Spider):
     name = "newsSpid"
     allowed_domains = ["thenextweb.com"]
@@ -31,11 +32,13 @@ class NewsSpidSpider(scrapy.Spider):
     def parse_specific(self, response):
 
         header_css_content = response.css(".c-header__text")
-
+        body_css_contet = response.css(".c-article__main *::text").getall()
         tag = header_css_content.css(".c-article-leadtag::text").get()
         header = header_css_content.css(".c-header__heading::text").get().strip()
         intro = header_css_content.css(".c-header__intro::text").get().strip()
         date = header_css_content.css("time::attr(datetime)").get()
+        
+        body = " ".join(body_css_contet).strip()
 
         # Generar un ID único basado en el header y la fecha
         unique_string = f"{header}-{date}"
@@ -47,6 +50,7 @@ class NewsSpidSpider(scrapy.Spider):
         newsItem['header'] = header
         newsItem['intro'] = intro
         newsItem['date'] = date
+        newsItem['body'] = body
 
         yield newsItem
     
