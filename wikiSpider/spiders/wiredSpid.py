@@ -51,6 +51,7 @@ class WiredSpidSpider(scrapy.Spider):
             newsItem['intro'] = intro
             newsItem['date'] = date
             newsItem['body'] = body
+            newsItem['url'] = "url"
 
             yield newsItem
 

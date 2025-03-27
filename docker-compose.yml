@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: scraper
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - can-network
+  scrapy:
+    image: scraper:latest
+    ports:
+      - "9030:8000"
+    environment:
+      PORT: 9030
+    networks:
+      - can-network
+    depends_on:
+      - postgres
+    
+networks:
+  can-network:
+    driver: "bridge"
+volumes:
+  cache:
+    driver: local
