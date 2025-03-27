@@ -21,4 +21,4 @@ COPY . .
 
 RUN chmod +x /usr/local/bin/scrapy
 
-CMD ["scrapy", "runspider", "wikiSpider/spiders/newsSpid.py"]
+CMD ["scrapy", "runspider", "wikiSpider/spiders/newsmergeSpid.py"]
