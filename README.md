@@ -46,3 +46,19 @@ python scrapy_scheduler_news.py
 python scrapy_scheduler_wired.py
 ```
 
+# If you prefer test in your computer: please use venv
+## Steps
+
+```sh
+python3 -m venv venv
+```
+
+
+```sh
+source ../venv/bin/activate
+```
+
+
+```sh
+pip install -r requirements.txt
+```
