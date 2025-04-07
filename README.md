@@ -4,7 +4,11 @@
 - [Requirements](#requirements)
 - [Configuration](#configuration)
 - [Installations](#installations)
-- [FAQ](#faq)
+- [Puertos](#puertos)
+- [Architecture](#architecture)
+- [Configuración de respuesta](#configuraciónderespuesta)
+- [Roadmap](#roadmap)
+- [Versioning](#versioning)
 - [Maintainers](#maintainer)
 - [Authors](#authors)
 
@@ -55,11 +59,27 @@ Instalación de librerias necesarias en el proyecto
 pip install -r requirements.txt
 ```
 
+
+## Puertos
+```plaintext
+| Servicio  | Puerto |
+|-----------|--------|
+| streamlit  | 8501   |
+| scraper   | 9030   |
+| postgres  | 5432   |
+```
+
+## Ejecución
+```sh
+docker compose up --build
+```
+
 ## Architecture
 El proyecto utiliza una patron de arquitectura recomendado por scrapy para la ETL desde el scraping hasta la creación del datalake.
 
+<img src="structure.png" alt="Descripción de la imagen" width="500"/>
 
-## Configuración de respuesta.
+## Configuración de respuesta
 
 The data is saved as json 
 ```json
