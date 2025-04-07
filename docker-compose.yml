@@ -13,9 +13,13 @@ services:
     networks:
       - can-network
   scrapy:
-    image: scraper:latest
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    image: scrapy:latest
     ports:
       - "9030:8000"
+      - "8501:8501"
     environment:
       PORT: 9030
     networks:

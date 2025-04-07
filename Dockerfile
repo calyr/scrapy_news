@@ -19,6 +19,14 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 COPY . .
 
-RUN chmod +x /usr/local/bin/scrapy
+# Copiar el script start.sh y darle permisos de ejecución
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
-CMD ["scrapy", "runspider", "wikiSpider/spiders/newsmergeSpid.py"]
+# Establecer el comando por defecto para ejecutar el script
+CMD ["/start.sh"]
+
+# RUN chmod +x /usr/local/bin/scrapy
+
+# CMD ["scrapy", "runspider", "wikiSpider/spiders/newsmergeSpid.py"]
+

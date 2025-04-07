@@ -25,7 +25,7 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -63,7 +63,10 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "wikiSpider.pipelines.WikispiderPipeline": 300,
+   "wikiSpider.zone_landing_pipeline.LandingZonePipeline": 100,
+   "wikiSpider.zone_refined_pipeline.RefinedZonePipeline": 300,
+   "wikiSpider.zone_refined_db_pipeline.RefinedDbPipeline": 500,
+   "wikiSpider.zone_consumption_pipeline.ConsumptionPipeline": 800,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

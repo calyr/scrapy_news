@@ -1,10 +1,10 @@
 import scrapy
 import hashlib
 import re
-from data_web import BASE_URLS, ALLOWED_DOMAINS, HEADERS
 from wikiSpider.items import NewsItem
+from wikiSpider.spiders.data_web import ALLOWED_DOMAINS, BASE_URLS, HEADERS
 class NewsMergeSpidSpider(scrapy.Spider):
-    name = "jabspider"
+    name = "newsmergepider"
     allowed_domains = ALLOWED_DOMAINS 
     start_urls = []
     custom_settings = HEADERS
